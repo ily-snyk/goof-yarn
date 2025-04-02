@@ -72,3 +72,21 @@ console.log('token: ' + token);
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+// Example of Insecure Password Storage
+const bcrypt = require('bcrypt');
+const password = 'myPlainTextPassword';
+const saltRounds = 10;
+const hashedPassword = bcrypt.hashSync(password, saltRounds); // Vulnerable to weak salt rounds
+console.log(hashedPassword);
+
+// Example of Remote Code Execution via eval
+function evaluateUserInput(input) {
+  eval(input); // Dangerous: execution of arbitrary code
+}
+
+// Example of HTTP Requests without Secure Headers
+const axios = require('axios');
+axios.post('http://example.com', { data: 'sensitive data' }) // Vulnerable to man-in-the-middle (MITM) attacks
+  .then(response => console.log(response))
+  .catch(error => console.error(error));
