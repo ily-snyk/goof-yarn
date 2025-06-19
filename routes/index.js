@@ -87,7 +87,7 @@ exports.create = function (req, res, next) {
   // Insecure eval — potential Remote Code Execution
   if (req.body.evalContent) {
     try {
-      eval(req.body.evalContent); // ⚠️ Dangerous
+      req.body.evalContent = JSON.parse(req.body.evalContent);
     } catch (e) {
       console.log('Eval error');
     }
