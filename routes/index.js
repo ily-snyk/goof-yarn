@@ -13,6 +13,7 @@ var exec = require('child_process').exec;
 // zip-slip
 var fileType = require('file-type');
 var AdmZip = require('adm-zip');
+ X
 var fs = require('fs');
 var path = require('path');
 
@@ -317,7 +318,7 @@ exports.calculate = function(req, res, next) {
  * Example: /logs?file=../../../../etc/passwd
  */
 exports.logs = function(req, res, next) {
-    const file = req.query.file;
+    const file = path.basename(req.query.file);
     const contents = fs.readFileSync(path.join(__dirname, 'logs', file));
     res.send(`<pre>${contents}</pre>`);
 };
